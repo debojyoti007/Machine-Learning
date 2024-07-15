@@ -1,0 +1,27 @@
+job_name ABC has issue of Ip quota that case we run the job from Tidal
+job_name ABC has issue of Sqoop that case we run the job from Tidal
+job_name ABC has issue of Hive connection that case we contact oncall
+job_name ABC has issue of Airflow faliure that we run the job from Tidal
+
+
+job_name EDP_WX_IWX_RAC has issue of Ip quota that case we run the job from Tidal
+job_name EDP_WX_IWX_RAC has issue of Sqoop that case we run the job from Tidal
+job_name EDP_WX_IWX_RAC has issue of Hive connection that case we contact oncall
+job_name EDP_WX_IWX_RAC has issue of Airflow faliure that case we run the job from Tidal
+job_name EDP_WX_IWX_RAC has issue of sql exception faliure that case we contact to DBA team
+
+job_name DEF has issue of Ip quota that case we run the job from Tidal
+job_name GHI has issue of Sqoop that case we run the job from Tidal
+job_name ABCDD has issue of Hive connection that case we contact oncall
+job_name ABCcccc has issue of Airflow faliure that we run the job from Tidal
+
+
+job_name DEFWFIxx has issue of Ip quota that case we run the job from Tidal
+job_name GHI_term_rox has issue of Sqoop that case we run the job from Tidal
+job_name ABCDDggfd_iox_rw has issue of Hive connection that case we contact oncall
+job_name ABCccccdfsd_iox_wx_rted has issue of Airflow faliure that we run the job from Tidal
+
+
+ticketing issue with VPC move this ticket to EDP Prod management operations and contact person Bhavia Patel
+ticketing issue with PBM move this ticket to DW-Support-tier1
+ticketing issue with scripting and load old data that case move this ticket to CHS-ingestion Team
