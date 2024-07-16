@@ -1,0 +1,96 @@
+!pip install openai==1.14.2
+!pip install langchain==0.1.13
+!pip install chromadb==0.4.24
+!pip install sentence_transformers==2.5.1
+
+--------------------------------------------------
+from langchain.document_loaders import TextLoader
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.chains import RetrievalQA
+from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
+
+-------------------------------------------------
+
+!pip install unstructured -q
+
+
+-------------------------------------------------
+
+from langchain.document_loaders import DirectoryLoader
+
+directory = '/content/cvs_ticket'
+
+def load_docs(directory):
+  loader = DirectoryLoader(directory)
+  documents = loader.load()
+  return documents
+
+documents = load_docs(directory)
+len(documents)
+-------------------------------------------------
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+
+def split_docs(documents,chunk_size=1000,chunk_overlap=20):
+  text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+  docs = text_splitter.split_documents(documents)
+  return docs
+
+docs = split_docs(documents)
+print(len(docs))
+----------------------------------------------------
+
+#pip install huggingface-hub==0.23.4
+import os
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+from langchain.llms import HuggingFaceEndpoint
+
+-----------------------------------------------------
+
+llm = HuggingFaceEndpoint(repo_id="mistralai/Mistral-7B-Instruct-v0.2")
+
+-----------------------------------------------------
+
+from langchain.chains.question_answering import load_qa_chain
+# chain = load_qa_chain(llm, chain_type="stuff")
+chain = load_qa_chain(llm, chain_type="stuff",verbose=True)
+
+-----------------------------------------------------
+
+!pip install langchain-huggingface
+from langchain_huggingface import HuggingFaceEmbeddings
+
+-----------------------------------------------------
+
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+-----------------------------------------------------
+
+from langchain.vectorstores import Chroma
+db = Chroma.from_documents(docs, embeddings)
+
+-----------------------------------------------------
+
+query = "job_name,EDP_WX_IWX_RAC has issue of Sqoop what may our step to resolve?"
+matching_docs = db.similarity_search(query)
+
+----------------------------------------------------
+
+matching_docs[0]
+
+----------------------------------------------------
+
+print(matching_docs[0].page_content)
+
+----------------------------------------------------
+
+query = "job_name EDP_WX_IWX_RAC has issue of sql exception faliure what may our step to resolve?"
+matching_docs = db.similarity_search(query)
+answer =  chain.run(input_documents=matching_docs, question=query)
+
+---------------------------------------------------
+
+answer
